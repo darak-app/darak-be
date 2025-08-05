@@ -43,7 +43,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly('io.jsonwebtoken:jjwt-jackson:0.11.5') // JSON 처리용
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'com.mysql:mysql-connector-j:8.0.33'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // 선택사항, 검증용
+    implementation 'org.apache.commons:commons-pool2' // Redis 커넥션 풀링 (선택)
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

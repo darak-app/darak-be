@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
     // 필요하면 사용자 정의 메서드 추가 가능
     User findByUsername(String username);
+    Boolean existsByUsername(String username);
 }
