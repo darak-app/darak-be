@@ -22,7 +22,7 @@ public class HandlerUtil {
 
     public ResponseEntity<ApiResponse<Void>> buildResponseEntityWithApiException(ApiException e) {
         return ResponseEntity
-                .status(HttpStatus.valueOf(e.getHttpStatusCode()))
-                .body(ApiResponse.failure(e));
+            .status(HttpStatus.valueOf(e.getHttpStatusCode()))
+            .body(ApiResponse.failureWithApiException(e));
     }
 }
