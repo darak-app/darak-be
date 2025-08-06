@@ -1,6 +1,5 @@
 package com.darakapp.darak.service.registration;
 
-import com.darakapp.darak.dto.request.registration.TokenRequest;
 import org.springframework.stereotype.Service;
 
 @Service

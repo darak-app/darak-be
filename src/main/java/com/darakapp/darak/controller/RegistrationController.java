@@ -2,7 +2,7 @@ package com.darakapp.darak.controller;
 
 import com.darakapp.darak.dto.request.registration.PhoneNumberValidationRequest;
 import com.darakapp.darak.dto.request.registration.RegistrationTokenValidationRequest;
-import com.darakapp.darak.dto.request.registration.TokenRequest;
+import com.darakapp.darak.dto.request.registration.RegistrationRequest;
 import com.darakapp.darak.dto.request.registration.UsernameValidationRequest;
 import com.darakapp.darak.dto.response.ApiResponse;
 import com.darakapp.darak.dto.response.registration.*;
@@ -71,12 +71,12 @@ public class RegistrationController {
     }
 
     @PostMapping("/token")
-    public ApiResponse<TokenResponse> createRegistrationToken(
-            @RequestBody TokenRequest request
+    public ApiResponse<RegistrationResponse> createRegistrationToken(
+            @RequestBody RegistrationRequest request
     ) {
         registrationValidationService.validateTokenRequest(request);
         String token = registrationTokenService.create(request, registrationValidationService.createVerificationCode());
-        return ApiResponse.success(HttpStatus.CREATED, new TokenResponse(token));
+        return ApiResponse.success(HttpStatus.CREATED, new RegistrationResponse(token));
     }
 
     @PostMapping("/registration_token_validation")

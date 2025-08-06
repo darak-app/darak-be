@@ -1,6 +1,6 @@
 package com.darakapp.darak.service.registration;
 
-import com.darakapp.darak.dto.request.registration.TokenRequest;
+import com.darakapp.darak.dto.request.registration.RegistrationRequest;
 import com.darakapp.darak.entity.User;
 import com.darakapp.darak.repository.jpa.UserRepository;
 import com.darakapp.darak.service.authentication.UserService;
@@ -35,7 +35,7 @@ public class RegistrationValidationService {
         return UsernameValidationResult.ok;
     }
 
-    public void validateTokenRequest(TokenRequest tokenRequest) {
+    public void validateTokenRequest(RegistrationRequest tokenRequest) {
         PhoneNumberValidationResult phoneNumberValidationResult = validatePhoneNumber(tokenRequest.getPhoneNumber());
         if (phoneNumberValidationResult != PhoneNumberValidationResult.ok) {
             throw new RegistrationPhoneNumberVerificationFailureException(phoneNumberValidationResult);

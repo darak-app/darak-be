@@ -1,6 +1,6 @@
 package com.darakapp.darak.service.authentication;
 
-import com.darakapp.darak.dto.request.registration.TokenRequest;
+import com.darakapp.darak.dto.request.registration.RegistrationRequest;
 import com.darakapp.darak.entity.User;
 import com.darakapp.darak.entity.UserGender;
 import com.darakapp.darak.repository.jpa.UserRepository;
@@ -16,7 +16,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void createUser(TokenRequest request) {
+    public void createUser(RegistrationRequest request) {
         userRepository.save(User.builder()
             .username(request.getUsername())
             .passwordHash(passwordEncoder.encode(request.getPassword()))
