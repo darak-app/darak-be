@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class TokenResponse {
+public class RegistrationResponse {
     private String registrationToken;
 }
