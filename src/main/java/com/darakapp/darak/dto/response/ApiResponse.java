@@ -1,6 +1,5 @@
 package com.darakapp.darak.dto.response;
 
-import com.darakapp.darak.dto.response.registration.TokenResponse;
 import com.darakapp.darak.exception.api.ApiException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
