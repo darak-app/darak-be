@@ -7,6 +7,7 @@ import com.darakapp.darak.dto.request.registration.UsernameValidationRequest;
 import com.darakapp.darak.dto.response.ApiResponse;
 import com.darakapp.darak.dto.response.registration.*;
 import com.darakapp.darak.exception.api.common.UnhandledApiException;
+import com.darakapp.darak.service.authentication.AuthenticationService;
 import com.darakapp.darak.service.registration.PhoneNumberValidationResult;
 import com.darakapp.darak.service.registration.RegistrationValidationService;
 import com.darakapp.darak.service.registration.RegistrationTokenService;
@@ -23,6 +24,7 @@ public class RegistrationController {
 
     private final RegistrationValidationService registrationValidationService;
     private final RegistrationTokenService registrationTokenService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/username_validation")
     public ApiResponse<UsernameValidationResponse> validateUserName(
@@ -84,7 +86,10 @@ public class RegistrationController {
             @RequestHeader("Registration-Token") String token,
             @RequestBody RegistrationTokenValidationRequest request
     ) {
-       if (registrationTokenService.validateAndParseToken(token, request.getSmsVerificationCode()) != null) {
+        RegistrationRequest originalRequest
+            = registrationTokenService.validateAndParseToken(token, request.getSmsVerificationCode());
+       if (originalRequest != null) {
+          authenticationService.createUser(originalRequest);
           return ApiResponse.success(HttpStatus.NO_CONTENT, null);
        } else {
            throw new RegistrationTokenVerificationFailureException();
