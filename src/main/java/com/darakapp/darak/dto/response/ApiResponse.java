@@ -19,17 +19,19 @@ public class ApiResponse<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final String errorCode;
 
-    public static ApiResponse<Void> success() {
-        return new ApiResponse<>(HttpStatus.OK.value(), "요청이 성공적으로 처리되었습니다.", null, null);
+    public static ApiResponse<Void> success(HttpStatus status) {
+        return new ApiResponse<>(status.value(), "요청이 성공적으로 처리되었습니다.", null, null);
     }
-    public static ApiResponse<Void> success(String message) {
-       return new ApiResponse<>(HttpStatus.OK.value(), message, null, null);
+    public static ApiResponse<Void> success(HttpStatus status, String message) {
+       return new ApiResponse<>(status.value(), message, null, null);
     }
-    public static <DataType> ApiResponse<DataType> success(DataType data) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "요청이 성공적으로 처리되었습니다.", data, null);
+    public static <DataType> ApiResponse<DataType> success(HttpStatus status, DataType data) {
+        return new ApiResponse<>(status.value(), "요청이 성공적으로 처리되었습니다.", data, null);
     }
-
-    public static ApiResponse<Void> failure(ApiException e) {
+    public static ApiResponse<Void> failureWithApiException(ApiException e) {
         return new ApiResponse<>(e.getHttpStatusCode(), e.getErrorMessage(), null, e.getErrorCode());
+    }
+    public static <DataType> ApiResponse<DataType> failure(HttpStatus status, String message, DataType data) {
+        return new ApiResponse<>(status.value(), message, data, null);
     }
 }

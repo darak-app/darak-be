@@ -1,12 +1,39 @@
 spring:
-    config:
-        import: optional:file:.env[.properties]
-    application:
-        name: darak
+  application:
+    name: darak
 
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-        username: ${DB_USER}
-        password: ${DB_PASS}
-        pbkdf2_pepper: ${PBKDF2_PEPPER}
+  session:
+    store-type: redis
+    timeout: 1800s
+
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 3600000
+
+  registration_jwt:
+    secret: ${JWT_SECRET}
+    expiration: 180000
+
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB_NAME}
+    username: ${MYSQL_DB_NAME}
+    password: ${MYSQL_PASS}
+
+  data:
+    mongodb:
+      host: ${MONGODB_HOST}
+      port: ${MONGODB_PORT}
+      username: ${MONGODB_USER}
+      password: ${MONGODB_PASS}
+      authentication-database: ${MONGODB_AUTH_DB_NAME}
+      database: ${MONGODB_DB_NAME}
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASS}
+
+  security:
+    pepper: ${PEPPER}
