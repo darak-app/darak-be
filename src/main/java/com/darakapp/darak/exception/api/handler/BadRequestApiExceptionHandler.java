@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.bind.BindException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -28,6 +29,7 @@ public class BadRequestApiExceptionHandler {
     @ExceptionHandler({
             HttpMessageNotReadableException.class,
             HttpMediaTypeException.class,
+            HttpRequestMethodNotSupportedException.class,
             MethodArgumentNotValidException.class,
             MissingServletRequestParameterException.class,
             MethodArgumentTypeMismatchException.class,
