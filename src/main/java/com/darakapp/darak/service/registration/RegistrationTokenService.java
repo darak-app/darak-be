@@ -31,6 +31,8 @@ public class RegistrationTokenService {
             .setExpiration(expiry)
             .claim("verification_code", verificationCode)
             .claim("username", tokenRequest.getUsername())
+            .claim("gender", tokenRequest.getGender())
+            .claim("nickname", tokenRequest.getNickname())
             .claim("password", tokenRequest.getPassword())
             .claim("email", tokenRequest.getEmail())
             .claim("phoneNumber", tokenRequest.getPhoneNumber())
@@ -48,20 +50,24 @@ public class RegistrationTokenService {
 
             if (!(claims.getSubject().equals("registration")))
                 return null;
-            if (!(claims.get("verification_code").equals(verificationCode)) ||
-                !(claims.containsKey("username")) ||
-                !(claims.containsKey("password")) ||
-                !(claims.containsKey("email")) ||
-                !(claims.containsKey("phoneNumber"))
+            if ((claims.get("verification_code").equals(verificationCode)) &&
+                (claims.containsKey("username")) &&
+                (claims.containsKey("password")) &&
+                (claims.containsKey("gender")) &&
+                (claims.containsKey("nickname")) &&
+                (claims.containsKey("email")) &&
+                (claims.containsKey("phoneNumber"))
             ) {
                 return RegistrationRequest.builder()
                         .username((String) claims.get("username"))
                         .password((String) claims.get("password"))
+                        .gender((String) claims.get("gender"))
+                        .nickname((String) claims.get("nickname"))
                         .email((String) claims.get("email"))
                         .phoneNumber((String) claims.get("phoneNumber"))
                         .build();
             }
-        } catch (JwtException | IllegalArgumentException | ClassCastException e) {
+        } catch (Exception e) {
             return null;
         }
         return null;
