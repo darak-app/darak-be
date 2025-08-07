@@ -27,10 +27,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserGender gender;
 
-    @Column(name = "password_hash")
+    @Column(name = "password_hash", length = 255)
     private String passwordHash;
 
-    @Column(name = "phone_number_hash")
+    @Column(name = "phone_number_hash", length = 255)
     private String phoneNumberHash;
 
     @CreationTimestamp
