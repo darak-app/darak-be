@@ -12,14 +12,14 @@ spring:
 
   registration_jwt:
     secret: ${JWT_SECRET}
-    expiration: 180000
+    expiration: 1800000
 
   config:
     import: optional:file:.env[.properties]
 
   datasource:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB_NAME}
-    username: ${MYSQL_DB_NAME}
+    username: ${MYSQL_USER}
     password: ${MYSQL_PASS}
 
   data:
