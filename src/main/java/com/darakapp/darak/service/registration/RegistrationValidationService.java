@@ -19,7 +19,7 @@ public class RegistrationValidationService {
     private final RegistrationTokenService registrationTokenService;
 
     public PhoneNumberValidationResult validatePhoneNumber(String phoneNumber) {
-        if (!userService.phoneNumberExists(phoneNumber)) {
+        if (userService.phoneNumberExists(phoneNumber)) {
             return PhoneNumberValidationResult.duplicate;
         }
         // TODO: 전화번호 제대로된 형식인지 검사
